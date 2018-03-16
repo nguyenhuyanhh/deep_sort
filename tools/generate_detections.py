@@ -129,7 +129,7 @@ def generate_detections(encoder, mot_dir, output_dir, detection_dir=None):
     output_dir
         Path to the output directory. Will be created if it does not exist.
     detection_dir
-        Path to custom detections. The directory structure should be the default
+        Path to custom detections. The directory structure should be default
         MOTChallenge structure: `[sequence]/det/det.txt`. If None, uses the
         standard MOTChallenge detections.
 
@@ -163,7 +163,7 @@ def generate_detections(encoder, mot_dir, output_dir, detection_dir=None):
         min_frame_idx = frame_indices.astype(np.int).min()
         max_frame_idx = frame_indices.astype(np.int).max()
         for frame_idx in range(min_frame_idx, max_frame_idx + 1):
-            print("Frame %05d/%05d" % (frame_idx, max_frame_idx))
+            print("Frame %06d/%06d" % (frame_idx, max_frame_idx))
             mask = frame_indices == frame_idx
             rows = detections_in[mask]
 

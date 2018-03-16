@@ -160,7 +160,7 @@ def run(sequence_dir, detection_file, output_file, min_confidence,
     seq_info = gather_sequence_info(sequence_dir, detection_file)
     metric = nn_matching.NearestNeighborDistanceMetric(
         "cosine", max_cosine_distance, nn_budget)
-    tracker = Tracker(metric)
+    tracker = Tracker(metric, 0.7, 1000, 200)
     results = []
 
     def frame_callback(vis, frame_idx):
@@ -209,7 +209,7 @@ def run(sequence_dir, detection_file, output_file, min_confidence,
     f = open(output_file, 'w')
     for row in results:
         print('%d,%d,%.2f,%.2f,%.2f,%.2f,1,-1,-1,-1' % (
-            row[0], row[1], row[2], row[3], row[4], row[5]),file=f)
+            row[0], row[1], row[2], row[3], row[4], row[5]), file=f)
 
 
 def parse_args():
@@ -223,7 +223,7 @@ def parse_args():
         "--detection_file", help="Path to custom detections.", default=None,
         required=True)
     parser.add_argument(
-        "--output_file", help="Path to the tracking output file. This file will"
+        "--output_file", help="Path to tracking output file. This file will"
         " contain the tracking results on completion.",
         default="/tmp/hypotheses.txt")
     parser.add_argument(
